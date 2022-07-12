@@ -1,23 +1,30 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { onAuthStateChanged } from "@firebase/auth";
-import { auth } from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
 // components
 import { Header } from "./components";
 // pages
-import { HomePage, LoginPage, RegisterPage } from "./pages";
-import { setAuth } from "./redux/actions/userActions";
+import { HomePage, LoginPage, RegisterPage, CreatePost } from "./pages";
+import { getAuth } from "firebase/auth";
+import { setCurrentUser, setIsLoggedIn } from "./redux/actions/userActions";
 
 function App() {
+    // contants
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
+    const auth = getAuth();
 
+    // hooks
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("APP: user is logged in");
-                dispatch(setAuth(user));
+                console.log("App: user is logged in", user);
+                dispatch(setCurrentUser(user));
+                dispatch(setIsLoggedIn(true));
+            } else {
+                console.log("App: user is logged in", user);
+                dispatch(setCurrentUser(null));
+                dispatch(setIsLoggedIn(false));
             }
         });
     }, []);
@@ -29,6 +36,7 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/register' element={<RegisterPage />} />
+                <Route path='/create' element={<CreatePost />} />
             </Routes>
         </>
     );

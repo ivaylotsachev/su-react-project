@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { setAuth, setCurrentUser } from "../../redux/actions/userActions";
+import { setIsLoggedIn, setCurrentUser } from "../../redux/actions/userActions";
 
 // styles
 import "./Header.scss";
@@ -12,24 +12,29 @@ const Header = () => {
     // constants
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const currentUser = useSelector((state) => state.user.currentUser);
 
-    useEffect(() => {
-        isAuthenticated && setUser(isAuthenticated.displayName);
-        console.log("header: isAuth", isAuthenticated);
-    }, [isAuthenticated]);
-
+    // methods
     const handleSignOut = () => {
         signOut(auth)
             .then(() => {
-                console.log("user has signed out");
-                dispatch(setAuth(false));
+                dispatch(setIsLoggedIn(false));
                 dispatch(setCurrentUser(null));
             })
             .catch((error) => {
-                console.log("Sign out error");
+                console.log("Sign out error", error);
             });
     };
+
+    // hooks
+    useEffect(() => {
+        console.log("header: isLoggedIn", isLoggedIn);
+    }, [isLoggedIn]);
+
+    useEffect(() => {
+        currentUser && setUser(currentUser.displayName);
+    }, [currentUser]);
 
     return (
         <header className='main-header w-100'>
@@ -40,16 +45,17 @@ const Header = () => {
                             Little Letter
                         </Link>
                     </li>
-                    {user && <p className='main-nav-item'>Welcome: {user}</p>}
+
                     <div>
-                        {!isAuthenticated && (
+                        {!isLoggedIn && (
                             <li className='main-nav-item'>
                                 <Link to='/login' className='main-nav-link'>
                                     Login
                                 </Link>
                             </li>
                         )}
-                        {isAuthenticated && (
+
+                        {isLoggedIn && (
                             <div className='flex aic'>
                                 <li className='main-nav-item'>
                                     <Link to={"/create"}>Create post</Link>
@@ -57,15 +63,24 @@ const Header = () => {
                                 <li className='main-nav-item'>
                                     <Link to={"/profile"}>Profile</Link>
                                 </li>
-                                <li
-                                    className='main-nav-item'
-                                    onClick={handleSignOut}
-                                >
-                                    <p>SignOut</p>
-                                </li>
                             </div>
                         )}
                     </div>
+
+                    {isLoggedIn && (
+                        <div className='flex main-nav-item aic'>
+                            <p>
+                                Welcome:{" "}
+                                {currentUser.displayName || "Annonumous"}{" "}
+                            </p>
+                            <span
+                                className='sign-out-button'
+                                onClick={handleSignOut}
+                            >
+                                SignOut
+                            </span>
+                        </div>
+                    )}
                 </ul>
             </nav>
         </header>

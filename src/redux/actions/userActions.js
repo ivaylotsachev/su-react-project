@@ -1,15 +1,9 @@
 import * as types from "./actionTypes";
 
-export const getCurrentUser = (payload) => {
+export const setIsLoggedIn = (payload) => {
+    console.log("userActions: setIsLoggedIn", payload);
     return {
-        type: types.GET_CURRENT_USER,
-        payload,
-    };
-};
-
-export const setAuth = (payload) => {
-    return {
-        type: types.USER_IS_AUTHENTICATED,
+        type: types.USER_IS_LOGGEDIN,
         payload,
     };
 };

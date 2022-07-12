@@ -11,14 +11,16 @@ label {
 }
 
 input,
-button {
+button,
+textarea {
     border-radius: 10px;
     background: transparent;
     outline: none;
     border-width: 1px;
 }
 
-input {
+input,
+textarea {
     padding: 1rem;
 }
 

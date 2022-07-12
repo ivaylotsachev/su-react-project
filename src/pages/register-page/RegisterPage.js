@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth";
-import { auth } from "../../firebase";
+import { getAuth } from "@firebase/auth";
 
 const RegisterPage = () => {
     const [user, setUser] = useState({
@@ -12,6 +12,7 @@ const RegisterPage = () => {
 
     const { email, password, displayName } = user;
     const navigate = useNavigate();
+    const auth = getAuth();
 
     // Methods:
     const handleChange = (e) => {
@@ -21,10 +22,10 @@ const RegisterPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.error("Reguster submit ", user);
+        console.log("Reguster submit ", user);
 
-        createUserWithEmailAndPassword(auth, email, password).then(
-            (userCrdential) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCrdential) => {
                 updateProfile(auth.currentUser, { displayName })
                     .then((user) => {
                         console.log("Register user updated", auth.currentUser);
@@ -33,8 +34,8 @@ const RegisterPage = () => {
                     .catch((error) => {
                         console.error("Register user update failed");
                     });
-            }
-        );
+            })
+            .catch((error) => console.log("Register error", error));
     };
 
     return (
