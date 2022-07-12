@@ -1,13 +1,11 @@
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
+import { setCurrentUser, setIsLoggedIn } from "./redux/actions/userActions";
+import { getAuth } from "firebase/auth";
 // components
 import { Header } from "./components";
-// pages
-import { HomePage, LoginPage, RegisterPage, CreatePost } from "./pages";
-import { getAuth } from "firebase/auth";
-import { setCurrentUser, setIsLoggedIn } from "./redux/actions/userActions";
+import AnimatedRoutes from "./components/AnimatedRoutes";
 
 function App() {
     // contants
@@ -32,12 +30,13 @@ function App() {
     return (
         <>
             <Header />
-            <Routes>
+            <AnimatedRoutes />
+            {/* <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/register' element={<RegisterPage />} />
                 <Route path='/create' element={<CreatePost />} />
-            </Routes>
+            </Routes> */}
         </>
     );
 }

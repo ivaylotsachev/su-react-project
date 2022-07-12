@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
 import { setIsLoggedIn, setCurrentUser } from "../../redux/actions/userActions";
+import { motion } from "framer-motion";
 
 const Login = () => {
     // Constants
@@ -32,7 +33,12 @@ const Login = () => {
     };
 
     return (
-        <div className='page-container flex flex-center w-100'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='page-container flex flex-center w-100'
+        >
             <form className='flex flex-column p-5' onSubmit={handleSubmit}>
                 <h3 className='form-title mb-3'>Login</h3>
                 <div className='input-container flex flex-column'>
@@ -71,7 +77,7 @@ const Login = () => {
                     </Link>
                 </div>
             </form>
-        </div>
+        </motion.div>
     );
 };
 

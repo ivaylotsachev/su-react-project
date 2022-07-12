@@ -4,6 +4,7 @@ import { database } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { setPosts } from "../../redux/actions/postActions";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 function HomePage() {
     // constants
@@ -29,7 +30,12 @@ function HomePage() {
     }, []);
 
     return (
-        <div className='page-container flex flex-column w-100'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='page-container flex flex-column w-100'
+        >
             <section className='page-section home-head-section'>
                 <h1 className='page-title'>Little Letter</h1>
                 <p className='title-desctiption'>Your today`s best memories!</p>
@@ -45,7 +51,7 @@ function HomePage() {
                     </div>
                 ))}
             </section>
-        </div>
+        </motion.div>
     );
 }
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import { database } from "../../firebase";
+import { motion } from "framer-motion";
 
 const CreatePost = () => {
     // constants
@@ -22,12 +23,17 @@ const CreatePost = () => {
             ...post,
             userId: state.user.currentUser.uid,
         }).then((data) => {
-            console.error("==============", data);
+            console.log("==============", data);
         });
     };
 
     return (
-        <div className='page-container flex flex-center'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='page-container flex flex-center'
+        >
             <form className='flex flex-column p-5' onSubmit={handleSubmit}>
                 <h3 className='form-title mb-3'>Create Post</h3>
                 <div className='input-container flex flex-column mb-3'>
@@ -59,7 +65,7 @@ const CreatePost = () => {
                 </div>
                 <button type='submit'>Create</button>
             </form>
-        </div>
+        </motion.div>
     );
 };
 
