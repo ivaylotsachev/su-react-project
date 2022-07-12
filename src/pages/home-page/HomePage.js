@@ -47,6 +47,7 @@ function HomePage() {
                     <div key={post.id} className='my-4'>
                         <h1>Title: {post.title}</h1>
                         <p>{post.content}</p>
+                        <img src={post.imageUrl} alt='' />
                         <hr />
                     </div>
                 ))}
