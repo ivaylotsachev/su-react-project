@@ -1,21 +1,78 @@
-import { useEffect } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../../firebase.js";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { setAuth, setCurrentUser } from "../../redux/actions/userActions";
 
 const Login = () => {
-    useEffect(() => {
-        const auth = getAuth();
+    // Constants
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [user, setUser] = useState({ email: "", password: "" });
+    const { email, password } = user;
 
-        signInWithEmailAndPassword(auth, "itsa4ev@gmaill.com", "123456")
-            .then((userCredentials) => {
-                console.log("user", userCredentials.user);
+    // Methods:
+    const handleChange = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userInfo) => {
+                dispatch(setCurrentUser(userInfo.user));
+                dispatch(setAuth(true));
+                navigate("/");
             })
             .catch((error) => {
-                console.log("Error:", error.message);
+                console.error("Login failed: ", error.message);
             });
-    }, []);
+    };
 
-    return <div>Login</div>;
+    return (
+        <div className='page-container flex flex-center w-100'>
+            <form className='flex flex-column p-5' onSubmit={handleSubmit}>
+                <h3 className='mb-3'>Login</h3>
+                <div className='input-container flex flex-column'>
+                    <label className='mb-2' htmlFor='email'>
+                        Email *
+                    </label>
+                    <input
+                        type='email'
+                        name='email'
+                        id='email'
+                        value={email}
+                        required
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className='input-container flex flex-column my-4'>
+                    <label className='mb-2' htmlFor='password'>
+                        Password *
+                    </label>
+                    <input
+                        type='password'
+                        name='password'
+                        id='password'
+                        value={password}
+                        required
+                        onChange={handleChange}
+                    />
+                </div>
+                <button className='button my-2' type='submit'>
+                    Login
+                </button>
+                <div className='mt-5 flex aic jcsb'>
+                    <p>Dont have an account?</p>
+                    <Link to={"/register"}>
+                        <button className='button'>Register</button>
+                    </Link>
+                </div>
+            </form>
+        </div>
+    );
 };
 
 export default Login;

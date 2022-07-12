@@ -1,6 +1,9 @@
 .flex {
     display: flex;
 }
+.flex-column {
+    flex-direction: column;
+}
 .flex-center {
     align-items: center;
     justify-content: center;
@@ -23,12 +26,76 @@
 .jcfe {
     justify-content: flex-end;
 }
-.jcc {
-    justify-content: center;
+.jcsb {
+    justify-content: space-between;
+}
+.w-100 {
+    width: 100%;
 }
 
-.main-container {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+.my-1 {
+    margin: 0.25rem 0;
+}
+
+.my-2 {
+    margin: 0.5rem 0;
+}
+.my-3 {
+    margin: 1rem 0;
+}
+.my-4 {
+    margin: 1.5rem 0;
+}
+.my-5 {
+    margin: 3rem 0;
+}
+
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+.mb-3 {
+    margin-bottom: 1rem;
+}
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+.mb-5 {
+    margin-bottom: 3rem;
+}
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+.mt-3 {
+    margin-top: 1rem;
+}
+.mt-4 {
+    margin-top: 1.5rem;
+}
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.p-1 {
+    padding: 0.25rem;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+.p-3 {
+    padding: 1rem;
+}
+.p-4 {
+    padding: 1.5rem;
+}
+.p-5 {
+    padding: 3rem;
 }
