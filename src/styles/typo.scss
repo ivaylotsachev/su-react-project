@@ -1,5 +1,30 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Righteous:regular);
 
 body {
     font-family: "Poppins", sans-serif;
+}
+
+.page-title {
+    font-family: "Righteous", cursive;
+    font-size: clamp(40px, 5vw, 5vw);
+}
+
+.post-title {
+    font-size: clamp(24px, 1.8vw, 1.8vw);
+    text-transform: capitalize;
+}
+
+.section-title {
+    font-size: clamp(28px, 5vw, 36px);
+    text-transform: uppercase;
+}
+
+.title-normal {
+    font-size: clamp(28px, 5vw, 36px);
+    text-transform: uppercase;
+}
+
+.text-center {
+    text-align: center;
 }

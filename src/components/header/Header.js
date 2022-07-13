@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { setIsLoggedIn, setCurrentUser } from "../../redux/actions/userActions";
+import { useNavigate } from "react-router-dom";
 
 // styles
 import "./Header.scss";
@@ -12,6 +13,7 @@ const Header = () => {
     // constants
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const currentUser = useSelector((state) => state.user.currentUser);
 
@@ -21,6 +23,7 @@ const Header = () => {
             .then(() => {
                 dispatch(setIsLoggedIn(false));
                 dispatch(setCurrentUser(null));
+                navigate("/");
             })
             .catch((error) => {
                 console.log("Sign out error", error);
@@ -37,48 +40,64 @@ const Header = () => {
     }, [currentUser]);
 
     return (
-        <header className='main-header w-100'>
+        <header className='main-header w-100 p-3'>
             <nav className='main-nav w-100'>
                 <ul className='main-nav-list flex jcsb aic w-100'>
-                    <li className='main-nav-item'>
-                        <Link to='/' className='main-nav-link'>
-                            Little Letter
-                        </Link>
-                    </li>
-
-                    <div>
-                        {!isLoggedIn && (
-                            <li className='main-nav-item'>
-                                <Link to='/login' className='main-nav-link'>
-                                    Login
-                                </Link>
-                            </li>
-                        )}
-
+                    <div className='flex'>
+                        <li className='main-nav-item'>
+                            <NavLink to='/' className='main-nav-link'>
+                                <strong className='brand'>M</strong>
+                            </NavLink>
+                        </li>
                         {isLoggedIn && (
                             <div className='flex aic'>
                                 <li className='main-nav-item'>
-                                    <Link to={"/create"}>Create post</Link>
+                                    <NavLink
+                                        to={"/user-posts"}
+                                        className={({ isActive }) =>
+                                            isActive ? "active-link" : ""
+                                        }
+                                    >
+                                        My posts
+                                    </NavLink>
                                 </li>
                                 <li className='main-nav-item'>
-                                    <Link to={"/profile"}>Profile</Link>
+                                    <NavLink
+                                        to={"/create"}
+                                        className={({ isActive }) =>
+                                            isActive ? "active-link" : ""
+                                        }
+                                    >
+                                        Create post
+                                    </NavLink>
                                 </li>
                             </div>
                         )}
                     </div>
 
+                    <div>
+                        {!isLoggedIn && (
+                            <li className='main-nav-item'>
+                                <NavLink
+                                    to='/login'
+                                    className={({ isActive }) =>
+                                        isActive ? "active-link" : ""
+                                    }
+                                >
+                                    Login
+                                </NavLink>
+                            </li>
+                        )}
+                    </div>
+
                     {isLoggedIn && (
                         <div className='flex main-nav-item aic'>
-                            <p>
-                                Welcome:{" "}
-                                {currentUser.displayName || "Annonumous"}{" "}
-                            </p>
-                            <span
-                                className='sign-out-button'
+                            <p
+                                className='sign-out-button ml-3'
                                 onClick={handleSignOut}
                             >
-                                SignOut
-                            </span>
+                                Logout
+                            </p>
                         </div>
                     )}
                 </ul>

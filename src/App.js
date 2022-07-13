@@ -7,36 +7,17 @@ import { getAuth } from "firebase/auth";
 import { Header } from "./components";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 
+let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+matched
+    ? document.body.classList.add("js-dark")
+    : document.body.classList.remove("js-dark");
+
 function App() {
-    // contants
-    const dispatch = useDispatch();
-    const auth = getAuth();
-
-    // hooks
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log("App: user is logged in", user);
-                dispatch(setCurrentUser(user));
-                dispatch(setIsLoggedIn(true));
-            } else {
-                console.log("App: user is logged in", user);
-                dispatch(setCurrentUser(null));
-                dispatch(setIsLoggedIn(false));
-            }
-        });
-    }, []);
-
     return (
         <>
             <Header />
             <AnimatedRoutes />
-            {/* <Routes>
-                <Route path='/' element={<HomePage />} />
-                <Route path='/login' element={<LoginPage />} />
-                <Route path='/register' element={<RegisterPage />} />
-                <Route path='/create' element={<CreatePost />} />
-            </Routes> */}
         </>
     );
 }

@@ -27,6 +27,7 @@ const CreatePost = () => {
 
         // create post
         const postsCollectionRef = collection(database, "posts");
+
         await addDoc(postsCollectionRef, {
             ...post,
             userId: currentUser.uid,
@@ -80,7 +81,6 @@ const CreatePost = () => {
                         type='text'
                         name='imageUrl'
                         id='postImage'
-                        required
                         onChange={handleChange}
                     />
                 </div>

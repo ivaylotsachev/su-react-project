@@ -1,9 +1,21 @@
 .main-header {
-    background: rgba(0, 0, 0, 0.4);
     position: absolute;
-    color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .main-nav-item {
     padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    .active-link {
+        border-bottom: 2px solid;
+    }
+}
+
+.brand {
+    background: black;
+    color: white;
+    padding: 0.7rem 1rem;
+    border-radius: 50%;
 }
