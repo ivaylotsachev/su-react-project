@@ -47,9 +47,11 @@ const RegisterPage = () => {
             className='page-container flex flex-center w-100'
         >
             <form className='flex flex-column p-5' onSubmit={handleSubmit}>
-                <h3 className='mb-3'>Register</h3>
+                <h3 className='form-title mb-4'>Register</h3>
                 <div className='input-container flex flex-column'>
-                    <label htmlFor='email'>Email *</label>
+                    <label className='mb-2' htmlFor='email'>
+                        Email *
+                    </label>
                     <input
                         type='email'
                         name='email'
@@ -60,7 +62,7 @@ const RegisterPage = () => {
                     />
                 </div>
                 <div className='input-container flex flex-column my-4'>
-                    <label className='mb-1' htmlFor='password'>
+                    <label className='mb-2' htmlFor='password'>
                         Password *
                     </label>
                     <input
@@ -73,7 +75,9 @@ const RegisterPage = () => {
                     />
                 </div>
                 <div className='input-container flex flex-column'>
-                    <label htmlFor='name'>Choose your display name *</label>
+                    <label htmlFor='name' className='mb-2'>
+                        Choose your display name *
+                    </label>
                     <input
                         type='text'
                         name='displayName'
@@ -84,7 +88,7 @@ const RegisterPage = () => {
                     />
                 </div>
                 <button className='button mt-5' type='submit'>
-                    Create an account
+                    Register
                 </button>
             </form>
         </motion.div>

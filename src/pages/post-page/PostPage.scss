@@ -1,0 +1,17 @@
+.selected-post-container {
+    align-items: stretch;
+
+    section {
+        max-width: 48%;
+        width: 100%;
+        height: auto;
+        border: 1px solid orange;
+        max-height: 100% !important;
+    }
+    .post-image-container {
+        .post-image {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}

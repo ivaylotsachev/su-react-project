@@ -42,7 +42,7 @@ const Login = () => {
             className='page-container flex flex-center w-100'
         >
             <form className='flex flex-column p-5' onSubmit={handleSubmit}>
-                <h3 className='form-title mb-3'>Login</h3>
+                <h3 className='form-title mb-4'>Login</h3>
                 <div className='input-container flex flex-column'>
                     <label className='mb-2' htmlFor='email'>
                         Email *
@@ -72,8 +72,8 @@ const Login = () => {
                 <button className='button my-2' type='submit'>
                     Login
                 </button>
-                <div className='mt-5 flex aic jcsb'>
-                    <p>Dont have an account?</p>
+                <div className='mt-5 flex aic jcfe'>
+                    <p className='mr-3'>Dont have an account?</p>
                     <Link to={"/register"}>
                         <button className='button'>Register</button>
                     </Link>

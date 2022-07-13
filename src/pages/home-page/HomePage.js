@@ -1,36 +1,12 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { database } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { setPosts } from "../../redux/actions/postActions";
-import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+// components
 import PostList from "../../components/post-list/PostList";
+import { useEffect } from "react";
 
 function HomePage() {
     // constants
-    const posts = useSelector((state) => state.posts.posts);
     const currentUser = useSelector((state) => state.user.currentUser);
-    const dispatch = useDispatch();
-    const postsCollectionRef = collection(database, "posts");
-
-    // methods
-    const getPosts = async () => {
-        const data = await getDocs(postsCollectionRef);
-
-        const docs = data.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-        }));
-
-        dispatch(setPosts(docs) || []);
-    };
-
-    // hooks
-    useEffect(() => {
-        getPosts();
-        console.log("possss", posts);
-    }, []);
 
     return (
         <motion.div

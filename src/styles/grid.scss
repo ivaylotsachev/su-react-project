@@ -123,6 +123,23 @@
     margin-left: 3rem;
 }
 
+.mr-1 {
+    margin-right: 0.25rem;
+}
+
+.mr-2 {
+    margin-right: 0.5rem;
+}
+.mr-3 {
+    margin-right: 1rem;
+}
+.mr-4 {
+    margin-right: 1.5rem;
+}
+.mr-5 {
+    margin-right: 3rem;
+}
+
 .p-1 {
     padding: 0.25rem;
 }
@@ -187,4 +204,23 @@
 }
 .pb-5 {
     padding-bottom: 3rem;
+}
+
+.pt-0 {
+    padding-top: 0 !important;
+}
+.pt-1 {
+    padding-top: 0.25rem;
+}
+.pt-2 {
+    padding-top: 0.5rem;
+}
+.pt-3 {
+    padding-top: 1rem;
+}
+.pt-4 {
+    padding-top: 1.5rem;
+}
+.pt-5 {
+    padding-top: 3rem;
 }

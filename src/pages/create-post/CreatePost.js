@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import { database } from "../../firebase";
@@ -67,7 +67,6 @@ const CreatePost = () => {
                     <textarea
                         id='content'
                         name='content'
-                        maxLength={300}
                         required
                         value={content}
                         onChange={handleChange}

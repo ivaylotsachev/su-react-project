@@ -10,7 +10,7 @@ const userReducer = (state = initialState, action) => {
         case types.USER_IS_LOGGEDIN:
             return { ...state, isLoggedIn: action.payload };
         case types.SET_CURRENT_USER:
-            return { ...state, currentUser: { ...action.payload } };
+            return { ...state, currentUser: action.payload };
         default:
             return state;
     }

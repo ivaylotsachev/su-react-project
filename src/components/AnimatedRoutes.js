@@ -4,13 +4,14 @@ import { AnimatePresence } from "framer-motion";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setCurrentUser, setIsLoggedIn } from "../redux/actions/userActions";
-// components
+// pages
 import {
     CreatePost,
     HomePage,
     LoginPage,
     RegisterPage,
     UserPosts,
+    PostPage,
 } from "../pages";
 
 const AnimatedRoutes = () => {
@@ -41,6 +42,7 @@ const AnimatedRoutes = () => {
                 <Route path='/register' element={<RegisterPage />} />
                 <Route path='/create' element={<CreatePost />} />
                 <Route path='/user-posts' element={<UserPosts />} />
+                <Route path='/post/:postId' element={<PostPage />} />
             </Routes>
         </AnimatePresence>
     );

@@ -30,11 +30,6 @@ const Header = () => {
             });
     };
 
-    // hooks
-    useEffect(() => {
-        console.log("header: isLoggedIn", isLoggedIn);
-    }, [isLoggedIn]);
-
     useEffect(() => {
         currentUser && setUser(currentUser.displayName);
     }, [currentUser]);
@@ -93,7 +88,7 @@ const Header = () => {
                     {isLoggedIn && (
                         <div className='flex main-nav-item aic'>
                             <p
-                                className='sign-out-button ml-3'
+                                className='sign-out-button ml-3 pointer'
                                 onClick={handleSignOut}
                             >
                                 Logout

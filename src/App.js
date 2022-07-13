@@ -1,11 +1,14 @@
 import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { setCurrentUser, setIsLoggedIn } from "./redux/actions/userActions";
-import { getAuth } from "firebase/auth";
 // components
 import { Header } from "./components";
 import AnimatedRoutes from "./components/AnimatedRoutes";
+import { database } from "./firebase";
+import { setPosts } from "./redux/actions/postActions";
+import {
+    getDatabasePosts,
+    subscribeToPostCollection,
+} from "./utils/firebaseUtils";
 
 let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -14,6 +17,15 @@ matched
     : document.body.classList.remove("js-dark");
 
 function App() {
+    // constants
+    const dispatch = useDispatch();
+
+    // hooks
+    useEffect(() => {
+        getDatabasePosts(database, dispatch, setPosts);
+        subscribeToPostCollection(database, dispatch, setPosts);
+    }, []);
+
     return (
         <>
             <Header />
