@@ -2,13 +2,18 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import PostItem from "../../components/post-list/post-item/PostItem";
+import { useNavigate } from "react-router-dom";
 
 const UserPosts = () => {
+    // constants
     const currentUser = useSelector((state) => state.user.currentUser);
     const posts = useSelector((state) => state.posts.posts);
+    const navigate = useNavigate();
 
-    console.log("UserPosts: ", posts);
-    console.log("UserPosts: ", currentUser);
+    // methods
+    const handleClick = (id) => {
+        navigate(`/post/${id}`);
+    };
 
     const renderPosts = () => {
         const hasPosts = posts.find((post) => post.userId === currentUser.uid);
@@ -23,7 +28,14 @@ const UserPosts = () => {
 
         return posts.map((post) => {
             if (post.userId === currentUser.uid) {
-                return <PostItem key={post.id} {...post} ellipsis={true} />;
+                return (
+                    <PostItem
+                        key={post.id}
+                        {...post}
+                        ellipsis={true}
+                        handleClick={handleClick}
+                    />
+                );
             }
         });
     };
@@ -40,7 +52,7 @@ const UserPosts = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className='page-container user-posts-container'
+                    className='page-container user-posts-container jcsb'
                 >
                     <h2 className='section-title my-2'>My posts</h2>
                     <div className='divider mb-2'></div>

@@ -1,11 +1,29 @@
 .selected-post-container {
     align-items: stretch;
+    height: auto;
+    min-height: 50vh !important;
+
+    .post-item {
+        max-width: 100%;
+        border: none;
+    }
 
     section {
         max-width: 48%;
         width: 100%;
         height: auto;
-        border: 1px solid orange;
         max-height: 100% !important;
+    }
+}
+
+@media (max-width: 1280px) {
+    .post-image-container {
+        max-height: auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .post-item {
+        flex-direction: column;
     }
 }

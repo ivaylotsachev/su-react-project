@@ -1,6 +1,6 @@
 .post-item {
     border: var(--main-border);
-    max-width: 48%;
+    max-width: 49.5%;
 }
 .post-image-container {
     max-width: 40%;
@@ -23,6 +23,12 @@
             text-overflow: ellipsis;
         }
     }
+}
+
+.post-title.emphasis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .post-item-footer {
