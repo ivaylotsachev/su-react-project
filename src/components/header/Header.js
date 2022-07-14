@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { setIsLoggedIn, setCurrentUser } from "../../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
+import { FaUser, FaSignOutAlt } from "react-icons/fa";
 
 // styles
 import "./Header.scss";
@@ -86,12 +87,17 @@ const Header = () => {
                     </div>
 
                     {isLoggedIn && (
-                        <div className='flex main-nav-item aic'>
+                        <div className='flex aic'>
+                            <p className='active-user main-nav-item'>
+                                <FaUser className='mr-2' />{" "}
+                                <strong>{currentUser.displayName}</strong>
+                            </p>
+
                             <p
-                                className='sign-out-button ml-3 pointer'
+                                className='main-nav-item sign-out-button button button-rounded ml-3 pointer flex aic'
                                 onClick={handleSignOut}
                             >
-                                Logout
+                                <FaSignOutAlt className='mr-2' /> Logout
                             </p>
                         </div>
                     )}

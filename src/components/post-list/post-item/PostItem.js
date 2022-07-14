@@ -8,7 +8,7 @@ const defaultImageUrl =
 
 const PostItem = ({ imageUrl, title, content, createdBy, id, ellipsis }) => {
     return (
-        <NavLink to={`/post/${id}`} className='post-item m-2'>
+        <NavLink to={`/post/${id}`} className='m-2 post-item'>
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -32,7 +32,7 @@ const PostItem = ({ imageUrl, title, content, createdBy, id, ellipsis }) => {
                             {" "}
                             <strong>Author:</strong> {createdBy}
                         </p>
-                        <p>Read more</p>
+                        <p className='read-more'>Read more</p>
                     </div>
                 </div>
             </motion.div>

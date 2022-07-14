@@ -5,44 +5,31 @@ form {
     max-width: 800px;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-}
+    label {
+        display: inline-block;
+    }
 
-label {
-    display: inline-block;
-}
+    input,
+    button,
+    textarea {
+        border-radius: 10px;
+        background: transparent;
+        outline: none;
+        border-width: 1px;
+    }
 
-input,
-button,
-textarea {
-    border-radius: 10px;
-    background: transparent;
-    outline: none;
-    border-width: 1px;
-}
+    input,
+    textarea {
+        padding: 1rem;
+        color: white;
+        border-color: rgba(255, 255, 255, 0.4);
+    }
 
-input,
-textarea {
-    padding: 1rem;
-    color: white;
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-button {
-    text-transform: uppercase;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 30px;
-    padding: 1rem;
-    border: none;
-}
-
-.form-title {
-    font-size: 34px;
-    font-weight: 300;
-    text-transform: uppercase;
-}
-
-form {
+    .form-title {
+        font-size: 34px;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
     button {
         background: rgb(81, 98, 180);
         transition: background 0.3s ease-in-out;

@@ -15,12 +15,7 @@ function HomePage() {
             exit={{ opacity: 0 }}
             className='page-container flex flex-column w-100'
         >
-            <section className='page-section home-head-section mb-5'>
-                {currentUser && (
-                    <p className='mb-5'>
-                        user: <strong>{currentUser.displayName}</strong>
-                    </p>
-                )}
+            <section className='page-section home-head-section my-5'>
                 <div className='text-center'>
                     <h1 className='page-title'>Welcome to Memos</h1>
                     <h3 className='title-desctiption'>

@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-// components
-import { Header } from "./components";
-import AnimatedRoutes from "./components/AnimatedRoutes";
 import { database } from "./firebase";
-import { setPosts } from "./redux/actions/postActions";
+import AnimatedRoutes from "./components/AnimatedRoutes";
 import {
     getDatabasePosts,
     subscribeToPostCollection,
 } from "./utils/firebaseUtils";
+import moment from "moment";
 
+// components
+import { Header } from "./components";
+import { setPosts } from "./redux/actions/postActions";
+
+// TODO: Find a better place to do this.
 let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 matched
