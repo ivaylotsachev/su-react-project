@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import PostItem from "../../components/post-list/post-item/PostItem";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 
 const UserPosts = () => {
     // constants
@@ -16,7 +17,9 @@ const UserPosts = () => {
     };
 
     const renderPosts = () => {
-        const hasPosts = posts.find((post) => post.userId === currentUser.uid);
+        const hasPosts = posts.find(
+            (post) => post.userId === currentUser.userId
+        );
 
         if (!hasPosts && currentUser)
             return (
@@ -27,7 +30,7 @@ const UserPosts = () => {
             );
 
         return posts.map((post) => {
-            if (post.userId === currentUser.uid) {
+            if (post.userId === currentUser.userId) {
                 return (
                     <PostItem
                         key={post.id}
@@ -41,9 +44,8 @@ const UserPosts = () => {
     };
 
     useEffect(() => {
-        console.log("UserPosts: posts updated", posts);
-        renderPosts();
-    }, [posts]);
+        if (posts && currentUser) renderPosts();
+    }, [posts, currentUser]);
 
     return (
         <>
@@ -57,7 +59,7 @@ const UserPosts = () => {
                     <h2 className='section-title my-2'>My posts</h2>
                     <div className='divider mb-2'></div>
                     <div className='use-posts-wrapper flex flex-wrap'>
-                        {renderPosts()}
+                        {currentUser && renderPosts()}
                     </div>
                 </motion.div>
             )}

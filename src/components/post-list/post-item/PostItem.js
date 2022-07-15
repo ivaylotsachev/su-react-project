@@ -1,5 +1,11 @@
-import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { doc, deleteDoc } from "firebase/firestore";
+import { database } from "../../../firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateUserPostsCount } from "../../../utils/firebaseUtils/usersUtils";
+import { setCurrentUser } from "../../../redux/actions/userActions";
+
 // component styles
 import "./PostItem.scss";
 
@@ -14,10 +20,23 @@ const PostItem = ({
     id,
     ellipsis,
     handleClick,
+    postDbId,
+    userEmail,
 }) => {
+    // constants
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     // methods
     const handlePostClick = () => {
         handleClick && handleClick(id);
+    };
+
+    const handleDelete = async () => {
+        await deleteDoc(doc(database, "posts", `${id}`)).then(() =>
+            updateUserPostsCount(dispatch, setCurrentUser, "decrement")
+        );
+        navigate("/user-posts");
     };
 
     return (
@@ -36,6 +55,7 @@ const PostItem = ({
                 />
             </div>
             <div className='post-content p-4 h-100 w-100'>
+                <button onClick={handleDelete}>delete</button>
                 <h4 className={"post-title mb-3 " + (ellipsis && "emphasis")}>
                     {title}
                 </h4>

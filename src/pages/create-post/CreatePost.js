@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { addDoc, collection } from "firebase/firestore";
+import { useSelector, useDispatch } from "react-redux";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { database } from "../../firebase";
 import { motion } from "framer-motion";
 import { updateUserPostsCount } from "../../utils/firebaseUtils/usersUtils";
+import { setCurrentUser } from "../../redux/actions/userActions";
+import { storePostToDatabase } from "../../utils/firebaseUtils/postsUtils";
 
 const CreatePost = () => {
     // constants
     const [post, setPost] = useState({
-        content: "",
-        title: "",
+        content: "some content",
+        title: "nekava title",
         userId: null,
         imageUrl: "",
     });
     const { title, content } = post;
     const currentUser = useSelector((state) => state.user.currentUser);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // methods
     const handleChange = (e) => {
@@ -26,15 +29,18 @@ const CreatePost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const postsCollectionRef = collection(database, "posts");
-
-        await addDoc(postsCollectionRef, {
+        const updatedPost = {
             ...post,
-            userId: currentUser.uid,
+            userId: currentUser.userId,
+            userEmail: currentUser.email,
             createdBy: currentUser.displayName,
-            likes: 0,
-        }).then(async (data) => {
-            await updateUserPostsCount().then(() => navigate("/"));
+            createdAt: Timestamp.fromDate(new Date(Date.now())),
+        };
+
+        await storePostToDatabase(updatedPost).then(async (data) => {
+            await updateUserPostsCount(dispatch, setCurrentUser).then(() =>
+                navigate("/")
+            );
         });
     };
 

@@ -24,14 +24,10 @@ const RegisterPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log("Reguster submit ", user);
-
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCrdential) => {
                 updateProfile(auth.currentUser, { displayName })
                     .then(async (user) => {
-                        console.log("Register user updated", auth.currentUser);
-
                         await storeUserToDatabase().then(() => navigate("/"));
                     })
                     .catch((error) => {

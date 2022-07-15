@@ -4,6 +4,8 @@ import { AnimatePresence } from "framer-motion";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setCurrentUser, setIsLoggedIn } from "../redux/actions/userActions";
+import { getUserFromDatabase } from "../utils/firebaseUtils/usersUtils";
+
 // pages
 import {
     CreatePost,
@@ -21,12 +23,14 @@ const AnimatedRoutes = () => {
     const auth = getAuth();
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            console.log("AnimatedRoutes: user is logged in");
-
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                dispatch(setCurrentUser(user));
-                dispatch(setIsLoggedIn(true));
+                await getUserFromDatabase(dispatch, setCurrentUser).then(
+                    (data) => {
+                        dispatch(setIsLoggedIn(true));
+                        console.error("User is logged in");
+                    }
+                );
             } else {
                 dispatch(setCurrentUser(null));
                 dispatch(setIsLoggedIn(false));

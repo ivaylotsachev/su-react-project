@@ -32,7 +32,7 @@ const Header = () => {
     };
 
     useEffect(() => {
-        currentUser && setUser(currentUser.displayName);
+        currentUser && setUser(currentUser);
     }, [currentUser]);
 
     return (
@@ -47,6 +47,7 @@ const Header = () => {
                         </li>
                         {isLoggedIn && (
                             <div className='flex aic'>
+                                <p>{user && user.posts}</p>
                                 <li className='main-nav-item'>
                                     <NavLink
                                         to={"/user-posts"}
@@ -90,7 +91,7 @@ const Header = () => {
                         <div className='flex aic'>
                             <p className='active-user main-nav-item'>
                                 <FaUser className='mr-2' />{" "}
-                                <strong>{currentUser.displayName}</strong>
+                                <strong>{user && user.displayName}</strong>
                             </p>
 
                             <p

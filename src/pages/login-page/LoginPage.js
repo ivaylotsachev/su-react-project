@@ -20,12 +20,9 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const auth = getAuth();
-        console.log("LoginPage", user);
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userInfo) => {
-                console.log("LoginPage signIn", userInfo.user);
-                dispatch(setCurrentUser(userInfo.user));
                 dispatch(setIsLoggedIn(true));
                 navigate("/");
             })
