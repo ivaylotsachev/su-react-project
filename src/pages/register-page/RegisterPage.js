@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth";
 import { getAuth } from "@firebase/auth";
 import { motion } from "framer-motion";
+import { storeUserToDatabase } from "../../utils/firebaseUtils/usersUtils";
 
 const RegisterPage = () => {
     const [user, setUser] = useState({
@@ -28,9 +29,10 @@ const RegisterPage = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCrdential) => {
                 updateProfile(auth.currentUser, { displayName })
-                    .then((user) => {
+                    .then(async (user) => {
                         console.log("Register user updated", auth.currentUser);
-                        navigate("/login");
+
+                        await storeUserToDatabase().then(() => navigate("/"));
                     })
                     .catch((error) => {
                         console.error("Register user update failed");

@@ -5,8 +5,7 @@ import AnimatedRoutes from "./components/AnimatedRoutes";
 import {
     getDatabasePosts,
     subscribeToPostCollection,
-} from "./utils/firebaseUtils";
-import moment from "moment";
+} from "./utils/firebaseUtils/postsUtils";
 
 // components
 import { Header } from "./components";

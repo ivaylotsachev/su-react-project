@@ -6,11 +6,21 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
+    const { payload } = action;
+
     switch (action.type) {
         case types.USER_IS_LOGGEDIN:
-            return { ...state, isLoggedIn: action.payload };
+            return { ...state, isLoggedIn: payload };
         case types.SET_CURRENT_USER:
-            return { ...state, currentUser: action.payload };
+            return { ...state, currentUser: payload };
+        case types.SET_CURRENT_USER_POSTS:
+            return {
+                ...state,
+                currentUser: {
+                    ...state.currentUser,
+                    posts: payload,
+                },
+            };
         default:
             return state;
     }

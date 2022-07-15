@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import { database } from "../../firebase";
 import { motion } from "framer-motion";
+import { updateUserPostsCount } from "../../utils/firebaseUtils/usersUtils";
 
 const CreatePost = () => {
     // constants
@@ -13,8 +14,8 @@ const CreatePost = () => {
         userId: null,
         imageUrl: "",
     });
-    const currentUser = useSelector((state) => state.user.currentUser);
     const { title, content } = post;
+    const currentUser = useSelector((state) => state.user.currentUser);
     const navigate = useNavigate();
 
     // methods
@@ -25,7 +26,6 @@ const CreatePost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // create post
         const postsCollectionRef = collection(database, "posts");
 
         await addDoc(postsCollectionRef, {
@@ -33,8 +33,8 @@ const CreatePost = () => {
             userId: currentUser.uid,
             createdBy: currentUser.displayName,
             likes: 0,
-        }).then((data) => {
-            navigate("/");
+        }).then(async (data) => {
+            await updateUserPostsCount().then(() => navigate("/"));
         });
     };
 

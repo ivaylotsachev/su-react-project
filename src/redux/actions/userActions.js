@@ -14,3 +14,8 @@ export const setCurrentUser = (payload) => {
         payload,
     };
 };
+
+export const setUserPosts = (payload) => ({
+    type: types.SET_CURRENT_USER_POSTS,
+    payload,
+});
